@@ -21,12 +21,24 @@ class BusinessCell: UITableViewCell {
     var business: Business! {
         didSet {
             businessLabel.text = business.name
-            
+            reviewsLabel.text = "\(business.reviewCount!) Reviews"
+            addressLabel.text = business.address
+            cuisineLabel.text = business.categories
+            thumbImageView.setImageWith(business.imageURL!)
+            distanceLabel.text = business.distance
+            ratingsImageView.setImageWith(business.ratingImageURL!)
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        thumbImageView.layer.cornerRadius = 3
+        thumbImageView.clipsToBounds = true
+        businessLabel.preferredMaxLayoutWidth = businessLabel.frame.size.width
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        businessLabel.preferredMaxLayoutWidth = businessLabel.frame.size.width
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
